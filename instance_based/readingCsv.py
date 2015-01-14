@@ -6,14 +6,14 @@ from Case import Case
 
 
 def readCase(row, types, names, solution):
-    attrs = []
+    attrs = {}
     for i in range (0,len(types)):
         if types[i] == 'r':
-            a = RealAttr(names[i],row[i])
-            attrs.append(a)
+            a = RealAttr(row[i])
+            attrs[names[i]] = a
         elif types[i] == 'c':
-            c = CategoricalAttr(names[i],row[i])
-            attrs.append(c)
+            c = CategoricalAttr(row[i])
+            attrs[names[i]] = c
         else:
             return (False,'wrong item on csv file')
     '''attrs contains the attributes of the case'''

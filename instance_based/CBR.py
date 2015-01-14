@@ -71,8 +71,6 @@ class CBR(Console):
         for c in _cases:
             c.printCase()
         
-        
-
     
 
 if __name__ == "__main__":
