@@ -6,26 +6,23 @@ class Attribute(object):
     @abstractmethod
     def askValue(self):
         """ Returns the attribute name """
-        return self._value
-
+        return self.__value
 
 class RealAttr(Attribute):
-    _value = None
 
     def __init__(self, value):
-        self._value = value 
+        self.__value = float(value)
 
     def askValue(self):
         """ Returns the attribute name """
-        return self._value
+        return self.__value
 
 class CategoricalAttr(Attribute):
-    _value = None
 
     def __init__(self, value):
-        self._value = value 
-    
+        self.__value = str(value)
+
     def askValue(self):
         """ Returns the attribute name """
-        return self._value
+        return self.__value
 

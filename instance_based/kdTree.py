@@ -1,4 +1,5 @@
 from Case import Case
+from Attributes import CategoricalAttr, RealAttr, Attribute
 import numpy
 from numpy import median
 import copy
@@ -17,27 +18,26 @@ class kdTree:
     def __init__(self, cases):
         try:
             assert(isinstance(cases, list))
-            #assert(all([isinstance(case, Case) for case in cases]))
-            assert(all([case.keys() == cases[0].keys() for case in cases]))
+            assert(all([isinstance(case, Case) for case in cases]))
+            assert(all([case.attributes.keys() == cases[0].attributes.keys()
+                for case in cases]))
         except AssertionError:
             raise Exception("Invalid library structure to construct kd-tree")
 
         self.num_cases = len(cases)
-        self.num_dim = len(cases[0])
-        self.attribute_names = cases[0].keys()
-        self.cat_attributes = [name for (name, value) in cases[0].items()
-            if not isinstance(value, int)]
-        #self.cat_attributes = [name for (name, value) in cases[0].items()
-        #    if isinstance(value, CategoricalAtrr)]
-        self.num_attributes = [name for (name, value) in cases[0].items()
-            if isinstance(value, int)]
+        self.num_dim = len(cases[0].attributes)
+        #self.attribute_names = cases[0].attribute_names.keys()
+        self.cat_attributes = [name for (name, value) in cases[0].attributes.items()
+            if isinstance(value, CategoricalAttr)]
+        self.num_attributes = [name for (name, value) in cases[0].attributes.items()
+            if not isinstance(value, CategoricalAttr)]
 
-        self.root = self.__construct_tree(cases, 0, self.num_attributes)
+        self.root = self.__construct_tree(cases, 0)
 
     def __del__(self):
         pass
 
-    def __construct_tree(self, cases, depth, attributes):
+    def __construct_tree(self, cases, depth):
         """ Constructs a kd-tree recursively """
 
         n = len(cases)
@@ -45,33 +45,39 @@ class kdTree:
         if n == 1:
             return Node(None, None, cases)
 
-        while len(attributes) > 0:
-            # Select dimensions cyclically
-            k = depth % len(attributes)
-            attr = attributes[k]
-
-            # Sort to check homogeneity & find median
-            values = [case[attr] for case in cases]
+        max_spread = float("-inf")
+        best_attr = None
+        best_threshold = None
+        for attr in self.num_attributes:
+            # Get and sort values
+            values = numpy.array([case.attributes[attr].askValue()
+                for case in cases])
             values.sort()
 
-            # If this dimension is not homogeneous proceed
-            if values[0] != values[-1]:
-                threshold = median(numpy.array(values))
+            # Compute statistic
+            threshold = median(values)
+            IQR1 = median(values[0:n//2])
+            IQR3 = median(values[n//2:n])
 
-                # Partition the data according to the threshold
-                left_cases = [case for case in cases if case[attr] <= threshold]
-                right_cases = [case for case in cases if case[attr] > threshold]
-                return Node(
-                        self.__construct_tree(left_cases, depth + 1, attributes),
-                        self.__construct_tree(right_cases, depth + 1, attributes),
-                        (attr, threshold))
-            # If it is, remove this attribute from the list
-            else:
-                attributes = copy.copy(attributes)
-                attributes.remove(attr)
+            spread = IQR3 - IQR1
+            if spread > max_spread:
+                max_spread = spread
+                best_threshold = threshold
+                best_attr = attr
 
+        if best_attr is not None:
+            # Partition the data according to the threshold
+            left_cases = [case for case in cases
+                    if case.attributes[attr].askValue() < best_threshold]
+            right_cases = [case for case in cases
+                    if case.attributes[attr].askValue() >= best_threshold]
+            return Node(
+                    self.__construct_tree(left_cases, depth + 1),
+                    self.__construct_tree(right_cases, depth + 1),
+                    (attr, threshold))
         # All the dimensions in this region are constant
-        return Node(None, None, cases)
+        else:
+            return Node(None, None, cases)
 
     def __print_leafs(self, node):
         """ Debug method to inspect the tree """
@@ -80,7 +86,7 @@ class kdTree:
         if node.left == None and node.right == None:
             print "Leaf: "
             for case in node.data:
-                print case
+                case.printCase()
             return
 
         # Otherwise, go left and then right

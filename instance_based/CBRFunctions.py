@@ -11,7 +11,7 @@ def checkFilename(filename):
 
 def readKindOfAttrs():
     variables_input = raw_input(
-                'Introduce the kind of variables:')
+                'Introduce the kind of variables: ')
     variables = variables_input.split(',')
     n = len(variables)
     variables_types = []
@@ -23,18 +23,21 @@ def readKindOfAttrs():
 
 def readAttrNames(n):
     variables_input = raw_input(
-                'Introduce the names of the variables:')
+                'Introduce the names of the variables: ')
     variables = variables_input.split(',')
     if len(variables) != n:
         return (False,'The number of variables is inconsistent')
     variables_names = []
     for i in range(0,n):
         variables_names.append(str(variables[i]).strip())
+
+    if len(set(variables_names)) != len(variables_names):
+        return (False, 'The attribute names must be uniques')
     return (True,variables_names)
 
 def readSolutionVariable(n):
     variables_input = raw_input(
-            'Introduce the variable that is the solution (number):')
+            'Introduce the variable that is the solution (number): ')
     solution = int(variables_input)
     if solution > n or solution < 1:
         return (False, 'Wrong Number')
