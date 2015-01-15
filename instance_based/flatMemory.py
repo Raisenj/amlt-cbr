@@ -1,6 +1,6 @@
 from Case import Case
 from Attributes import CategoricalAttr, RealAttr, Attribute
-from CBRFunctions import normalize
+from CBRFunctions import normalize, weightedSum
 
 class flatMemory:
     """ A flt memory implementation """
@@ -32,6 +32,20 @@ class flatMemory:
             sim.append(list(zip(*similarities)[i]))
             if types[i] == 'r':
                 sim[i] = normalize(sim[i])
+        similarities = []
+        for i in xrange(0,self.num_dim):
+            similarities.append(sim[i])
+
+        similarities = zip(*similarities)
+
+        ## Here we have the similarities of each case
+        weighted_similarities = map(weightedSum, similarities)
+        print 'ws'
+        print weighted_similarities
+        print '5 most similar'
+        for v in sorted(weighted_similarities)[1:5]:
+            print v
+            
         
         
 

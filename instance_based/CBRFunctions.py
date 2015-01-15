@@ -53,6 +53,14 @@ def normalize(l):
     minimum = np.min(l) 
     mapFunc = partial(normEquation,minimum = minimum, maximum = maximum)
     l = map(mapFunc,l)
+    return l
 
 def normEquation(v,minimum,maximum):
     return (v - minimum)/(maximum-minimum)
+
+def weightedSum(l):
+    sum_ = 0
+    for v in l:
+        sum_+=v
+    return sum_/len(l)
+
