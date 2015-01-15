@@ -1,5 +1,7 @@
 #!/usr/bin/python
 import os
+import numpy as np
+import itertools
 
 def checkFilename(filename):
     abspath = os.path.abspath(filename)
@@ -44,6 +46,15 @@ def readSolutionVariable(n):
     else:
         return (True,solution)
 
+def normalize(l):
+    for v in l:
+        print v
+    maximum = np.max(l) 
+    minimum = np.min(l) 
+    new_l = []
+    for v in l:
+        new_l.append((v - minimum)/(maximum-minimum))
+    return new_l
 
 
 

@@ -30,7 +30,7 @@ class kdTree:
         self.cat_attributes = [name for (name, value) in cases[0].attributes.items()
             if isinstance(value, CategoricalAttr)]
         self.num_attributes = [name for (name, value) in cases[0].attributes.items()
-            if not isinstance(value, CategoricalAttr)]
+            if not isinstance(value, RealAttr)]
 
         self.root = self.__construct_tree(cases, 0)
 
@@ -118,6 +118,8 @@ if __name__ == "__main__":
     for i in xrange(100):
         cases.append(dict(zip(range(1, 10),
             [random.randint(0,100) for r in xrange(10)])))
-
+    print 'cases'
+    for c in cases:
+        print c
     tree = kdTree(cases)
     tree._kdTree__print_leafs(tree.root)

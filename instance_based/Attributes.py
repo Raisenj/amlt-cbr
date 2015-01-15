@@ -1,4 +1,5 @@
 from abc import ABCMeta, abstractproperty, abstractmethod
+import numpy
 
 class Attribute(object):
     __metaclass__ = ABCMeta
@@ -8,6 +9,11 @@ class Attribute(object):
         """ Returns the attribute name """
         return self.__value
 
+    @abstractmethod
+    def similarity(self,value):
+        """ Returns the attribute name """
+
+
 class RealAttr(Attribute):
 
     def __init__(self, value):
@@ -16,6 +22,9 @@ class RealAttr(Attribute):
     def askValue(self):
         """ Returns the attribute name """
         return self.__value
+    def similarity(self, value):
+        ## Normal distance
+        return abs(self.__value-value.__value)
 
 class CategoricalAttr(Attribute):
 
@@ -25,4 +34,11 @@ class CategoricalAttr(Attribute):
     def askValue(self):
         """ Returns the attribute name """
         return self.__value
+    def similarity(self,value):
+        ## Equal
+        if self.__value == value:
+            return  0
+        else:
+            return  1
 
+        

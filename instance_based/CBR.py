@@ -1,8 +1,9 @@
 #!/usr/bin/python
 from Console import Console
-from readingCsv import readCasesFromCsv
+from readingCsv import readCasesFromCsv, readCurrentCase
 from CBRFunctions import *
 from kdTree import kdTree
+from flatMemory import flatMemory
 import os
 
 class CBR(Console):
@@ -15,7 +16,8 @@ class CBR(Console):
         self.cases_flat = None
         self.cases_hierarchical = None
         self.solution = None
-        self.solution_name = None
+        self.label_name = None
+        self.current_case = None
 
     def do_loadCasesFromCsv(self, args):
         """Loads the cases from the specified csv file"""
@@ -67,18 +69,54 @@ class CBR(Console):
             print result[1]
             return
         self.solution = result[1]
-        self.solution_name = names[result[1]-1]
+        self.label_name = names[result[1]-1]
 
-        result = readCasesFromCsv(abspath, types, names, self.solution_name)
+        result = readCasesFromCsv(abspath, types, names, self.label_name)
         if result[0] == False:
             print result[1]
             return
-        self.cases_flat = result[1]
-        print '\nCases Loaded.\nCASES:'
-        for c in self.cases_flat:
-            c.printCase()
 
-        self.cases_hierarchical = kdTree(self.cases_flat)
+        self.cases_flat = flatMemory(result[1])
+        #self.cases_hierarchical = kdTree(self.cases_flat)
+
+    
+    def do_printFlatMemory(self, args):
+        """Prints the cases stored at flat memory"""
+        if self.cases_flat:
+            self.cases_flat.printFlatMemory()
+        else:
+            print 'No loaded cases'
+
+    def do_printCurrentCase(self, args):
+        """Prints the current case"""
+        if self.current_case:
+            self.current_case.printCase()
+        else:
+            print 'There is no current case loaded'
+
+    def do_newCase(self,args):
+        """Introduce a new case to be analyzed"""
+        intro = 'Introduce a new case following the format of the '\
+                'previous loaded cases:\n'
+        if not self.cases_flat:
+            print 'First you need to load the library of cases'
+            return
+        user_input = raw_input(intro)
+        input_values = user_input.split(',')
+        if len(input_values) != self.cases_flat.num_dim:
+            print 'wrong input'
+            return
+        result = readCurrentCase(input_values,
+                self.cases_flat.cases[0].types(),
+                self.cases_flat.cases[0].names())
+        if result[0] == False:
+            print result[1] 
+            return
+        else:
+            self.current_case = result[1]
+    def do_executeCBR(self,args):
+        self.cases_flat.retrieve(self.current_case)
+
 
 if __name__ == "__main__":
     cbr = CBR()
