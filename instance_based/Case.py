@@ -43,7 +43,7 @@ class Case():
         return self.label.keys()[0]
 
     def similarity(self,case):
-        s = [] 
+        s = []
         for k in self.attributes.keys():
             s.append(self.attributes[k].similarity(case.attributes[k]))
         return s

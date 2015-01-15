@@ -6,10 +6,10 @@ from functools import partial
 def checkFilename(filename):
     abspath = os.path.abspath(filename)
     if not os.path.isfile(abspath):
-        return (False,'the filename does not exists')
+        raise Exception('the filename does not exists')
     if not filename.endswith('csv'):
-        return (False,'the file is not a csv file')
-    return (True, abspath)
+        raise Exception('the file is not a csv file')
+    return abspath
 
 def readKindOfAttrs():
     variables_input = raw_input(
@@ -17,40 +17,42 @@ def readKindOfAttrs():
     variables = variables_input.split(',')
     n = len(variables)
     variables_types = []
-    for i in range(0,n):
+    for i in xrange(0, n):
         if not str(variables[i]).strip() in ['r','c']:
-            return (False, 'wrong input')
+            raise Exception('wrong input')
         variables_types.append(str(variables[i]).strip())
-    return (True, variables_types)
+    return variables_types
 
 def readAttrNames(n):
     variables_input = raw_input(
                 'Introduce the names of the variables: ')
     variables = variables_input.split(',')
     if len(variables) != n:
-        return (False,'The number of variables is inconsistent')
+        raise Exception('The number of variables is inconsistent')
+
     variables_names = []
-    for i in range(0,n):
+    for i in xrange(0,n):
         variables_names.append(str(variables[i]).strip())
 
     if len(set(variables_names)) != len(variables_names):
-        return (False, 'The attribute names must be uniques')
-    return (True,variables_names)
+        raise Exception('The attribute names must be uniques')
+    return variables_names
 
 def readSolutionVariable(n):
     variables_input = raw_input(
             'Introduce the variable that is the solution (number): ')
     solution = int(variables_input)
-    if solution > n or solution < 1:
-        return (False, 'Wrong Number')
-    else:
-        return (True,solution)
 
-def normalize(l):
+    if solution > n or solution < 1:
+        raise Exception('Wrong Number')
+
+    return solution
+
+def normalize(values):
     for v in l:
         print v
-    maximum = np.max(l) 
-    minimum = np.min(l) 
+    maximum = np.max(l)
+    minimum = np.min(l)
     mapFunc = partial(normEquation,minimum = minimum, maximum = maximum)
     l = map(mapFunc,l)
     return l

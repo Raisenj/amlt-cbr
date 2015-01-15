@@ -45,13 +45,11 @@ class flatMemory:
         print '5 most similar'
         for v in sorted(weighted_similarities)[1:5]:
             print v
-            
-        
-        
 
     def retrieve(self,case):
         """ Retrieve the most similar case(s) """
         return self.__retrieve(case)
+
     def printFlatMemory(self):
         for c in self.cases:
             c.printCase()

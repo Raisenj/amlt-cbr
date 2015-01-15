@@ -12,10 +12,10 @@ def readCurrentCase(row, types, names):
         elif types[i] == 'c':
             attrs[names[i]] = CategoricalAttr(row[i])
         else:
-            return (False,'wrong item on input')
+            raise Exception('wrong item on input')
 
     #attrs contains the attributes of the case
-    return (True, Case(attrs))
+    return Case(attrs)
 
 def readCase(row, types, names, label_name):
     attrs = {}
@@ -25,12 +25,12 @@ def readCase(row, types, names, label_name):
         elif types[i] == 'c':
             attrs[names[i]] = CategoricalAttr(row[i])
         else:
-            return (False,'wrong item on input')
+            raise Exception('wrong item on input')
 
     #attrs contains the attributes of the case
     label = attrs[label_name]
     attrs.pop(label_name)
-    return (True, Case(attrs, {label_name : label}))
+    return Case(attrs, {label_name : label})
 
 def readCasesFromCsv(filename, types, names, label_name):
     cases = []
@@ -38,14 +38,10 @@ def readCasesFromCsv(filename, types, names, label_name):
     with open(filename, 'rb') as csvfile:
         reader = csv.reader(csvfile)
         for row in reader:
-            if row:
-                if len(row) != m:
-                    return (False,'the elements of the csv are not '\
-                            'consistent with the structure provided.')
-                result = readCase(row, types, names, label_name)
-                if result[0] == False:
-                    return result
-                else:
-                    cases.append(result[1])
-    return (True, cases)
+            if len(row) != m:
+                raise Exception('the elements of the csv are not '\
+                        'consistent with the structure provided.')
+            case = readCase(row, types, names, label_name)
+            cases.append(case)
+    return cases
 
