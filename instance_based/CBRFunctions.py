@@ -1,7 +1,7 @@
 #!/usr/bin/python
 import os
 import numpy as np
-import itertools
+from functools import partial
 
 def checkFilename(filename):
     abspath = os.path.abspath(filename)
@@ -51,10 +51,8 @@ def normalize(l):
         print v
     maximum = np.max(l) 
     minimum = np.min(l) 
-    new_l = []
-    for v in l:
-        new_l.append((v - minimum)/(maximum-minimum))
-    return new_l
+    mapFunc = partial(normEquation,minimum = minimum, maximum = maximum)
+    l = map(mapFunc,l)
 
-
-
+def normEquation(v,minimum,maximum):
+    return (v - minimum)/(maximum-minimum)
