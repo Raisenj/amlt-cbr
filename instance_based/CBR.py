@@ -137,7 +137,10 @@ class CBR(Console):
         for c in cases_similar:
             c[0].printCase()
             print 'sim: ', c[1]
-        adapt(cases_similar)
+        solution = adapt(cases_similar)
+
+        print 'ADAPTATION - Result (Solution):'
+        print solution
 
 
 

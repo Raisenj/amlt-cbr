@@ -5,8 +5,8 @@ class Case():
     def __init__(self, attributes, label=None):
         self.attributes = attributes
         self.label = label
-        self.utility = None
-        self.evaluation = None
+        self.utility = 0
+        self.evaluation = True
 
     def __del__(self):
         pass
@@ -46,6 +46,7 @@ class Case():
 
     def labelValue(self):
         return self.label[self.label.keys()[0]].askValue()
+
 
     def similarity(self, case, minimum, maximum):
         sim = {} 
