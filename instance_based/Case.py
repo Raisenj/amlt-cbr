@@ -14,8 +14,10 @@ class Case():
     def printCase(self):
         print '\n'
         print '====== CASE ======'
+        print '-- Attributes'
         for k in self.attributes.keys():
             print k, ': ', self.attributes[k].askValue()
+        print '-- Label'
         if self.label:
             for k in self.label.keys():
                 print k, ': ',  self.label[k].askValue()
@@ -32,21 +34,36 @@ class Case():
                 types.append('c')
         return types
 
-    def names(self):
+    def attrNames(self):
         names = []
         for name in self.attributes.keys():
             names.append(name)
-        names.append(self.label.keys()[0])
+        #names.append(self.label.keys()[0])
         return names
 
     def labelName(self):
         return self.label.keys()[0]
 
-    def similarity(self,case):
-        s = [] 
-        for k in self.attributes.keys():
-            s.append(self.attributes[k].similarity(case.attributes[k]))
-        return s
+    def labelValue(self):
+        return self.label[self.label.keys()[0]].askValue()
+
+    def similarity(self, case, minimum, maximum):
+        sim = {} 
+        for (k,v) in self.attributes.items():
+            try:
+                minimum_v = minimum[k] 
+            except KeyError:
+                print 'key error'
+                minimum_v = None
+            try:
+                maximum_v = maximum[k] 
+            except KeyError:
+                print 'key error'
+                maximum_v = None
+            sim[k] = v.similarity(case.attributes[k],minimum_v,maximum_v)
+        similarity = sum(sim.values())
+
+        return similarity
 
 
 

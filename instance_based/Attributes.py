@@ -1,4 +1,5 @@
 from abc import ABCMeta, abstractproperty, abstractmethod
+from CBRFunctions import normalize
 import numpy
 
 class Attribute(object):
@@ -10,8 +11,12 @@ class Attribute(object):
         return self.__value
 
     @abstractmethod
-    def similarity(self,value):
+    def similarity(self,value, minimum_v = None, maximum_v = None):
         """ Returns the attribute name """
+    
+    @abstractmethod
+    def attrType(self):
+        """ returns type"""
 
 
 class RealAttr(Attribute):
@@ -22,9 +27,14 @@ class RealAttr(Attribute):
     def askValue(self):
         """ Returns the attribute name """
         return self.__value
-    def similarity(self, value):
+    def similarity(self, value, minimum_v, maximum_v):
         ## Normal distance
-        return abs(self.__value-value.__value)
+        sim = abs(normalize(self.__value,minimum_v, maximum_v)-
+                normalize(value.askValue() ,minimum_v, maximum_v))
+        return sim
+    
+    def attrType(self):
+        return 'r'
 
 class CategoricalAttr(Attribute):
 
@@ -34,7 +44,12 @@ class CategoricalAttr(Attribute):
     def askValue(self):
         """ Returns the attribute name """
         return self.__value
-    def similarity(self,value):
+
+    def attrType(self):
+        return 'c'
+
+
+    def similarity(self,value, minimum_v = None, maximum_v = None):
         ## Equal
         if self.__value == value:
             return  0

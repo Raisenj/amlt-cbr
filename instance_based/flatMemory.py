@@ -1,6 +1,6 @@
 from Case import Case
 from Attributes import CategoricalAttr, RealAttr, Attribute
-from CBRFunctions import normalize, weightedSum
+from CBRFunctions import normalize
 
 class flatMemory:
     """ A flt memory implementation """
@@ -17,6 +17,20 @@ class flatMemory:
         self.num_cases = len(cases)
         self.num_dim = len(cases[0].attributes)
         self.cases = cases
+        self.maximum = {}
+        self.minimum = {}
+       
+        for (k,v) in cases[0].attributes.items():
+            if isinstance(v,RealAttr):
+                self.maximum[k] = float('-inf')
+                self.minimum[k] = float('inf')
+
+        for c in cases:
+            for (k,v) in c.attributes.items():
+                if isinstance(v,RealAttr):
+                    self.minimum[k] = min(self.minimum[k],v.askValue())
+                    self.maximum[k] = max(self.maximum[k],v.askValue())
+
 
     def __del__(self):
         pass
@@ -25,35 +39,17 @@ class flatMemory:
         """ Retrieve the most similar case(s) """
         similarities = []
         for c in self.cases:
-            similarities.append(c.similarity(case))
-        types = case.types()
-        sim = []
-        for i in xrange(0,self.num_dim):
-            sim.append(list(zip(*similarities)[i]))
-            if types[i] == 'r':
-                sim[i] = normalize(sim[i])
-        similarities = []
-        for i in xrange(0,self.num_dim):
-            similarities.append(sim[i])
-
-        similarities = zip(*similarities)
-
-        ## Here we have the similarities of each case
-        weighted_similarities = map(weightedSum, similarities)
-        print 'ws'
-        print weighted_similarities
-        print '5 most similar'
-        for v in sorted(weighted_similarities)[1:5]:
-            print v
-            
-        
-        
-
+            similarities.append(c.similarity(case,self.minimum,self.maximum))
+        return similarities
+                    
     def retrieve(self,case):
         """ Retrieve the most similar case(s) """
         return self.__retrieve(case)
+
     def printFlatMemory(self):
         for c in self.cases:
             c.printCase()
         print '\n Num of cases: %d' % self.num_cases
+    def askCae(self, index):
+        return self.cases[index]
 

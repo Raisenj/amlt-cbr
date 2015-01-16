@@ -46,21 +46,15 @@ def readSolutionVariable(n):
     else:
         return (True,solution)
 
-def normalize(l):
-    for v in l:
-        print v
-    maximum = np.max(l) 
-    minimum = np.min(l) 
-    mapFunc = partial(normEquation,minimum = minimum, maximum = maximum)
-    l = map(mapFunc,l)
-    return l
+def normalize(v,maximum_v,minimum_v):
+    return (v-minimum_v)/(maximum_v-minimum_v)
 
-def normEquation(v,minimum,maximum):
-    return (v - minimum)/(maximum-minimum)
+def adapt(similar_cases):
+    print 'ADAPTATION'
+    labels = set([c.labelValue() for (c,s) in similar_cases])
+    for c in  (c,s) in similar_cases:
 
-def weightedSum(l):
-    sum_ = 0
-    for v in l:
-        sum_+=v
-    return sum_/len(l)
+
+
+
 
