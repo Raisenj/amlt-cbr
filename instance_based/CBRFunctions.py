@@ -2,6 +2,7 @@
 import os
 import numpy as np
 from functools import partial
+from operator import itemgetter
 
 def checkFilename(filename):
     abspath = os.path.abspath(filename)
@@ -48,21 +49,30 @@ def readSolutionVariable(n):
 
     return solution
 
-def normalize(values):
-    for v in l:
-        print v
-    maximum = np.max(l)
-    minimum = np.min(l)
-    mapFunc = partial(normEquation,minimum = minimum, maximum = maximum)
-    l = map(mapFunc,l)
-    return l
+def normalize(v,maximum_v,minimum_v):
+    return (v-minimum_v)/(maximum_v-minimum_v)
 
-def normEquation(v,minimum,maximum):
-    return (v - minimum)/(maximum-minimum)
-
-def weightedSum(l):
-    sum_ = 0
-    for v in l:
-        sum_+=v
-    return sum_/len(l)
-
+def adapt(similar_cases):
+    labels = list(set([c.labelValue() for (c,s) in similar_cases]))
+    labels_punct = {}
+    exactMatch = None
+    for l in labels:
+        labels_punct[l] = 0
+    for (c,s) in similar_cases:
+        if c.evaluation == True:
+            if s == 0:
+                exactMatch = (True,c.labelValue())
+                return
+            else:
+                labels_punct[c.labelValue()] += (100/(s*s) + c.utility)
+        else:
+            if s == 0:
+                exactMatch = (False, c.labelValue())
+            labels_punct[c.labelValue()] -= (100/(s*s) + c.utility)
+    if exactMatch!= None:
+        if exactMatch[0]:
+            solution = exactMatch[1]
+        else:
+            labels_punct.pop(exactMatch[1])
+    solution = max(labels_punct.iteritems(), key=itemgetter(1))[0]
+    return solution

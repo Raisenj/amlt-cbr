@@ -4,8 +4,11 @@ from readingCsv import readCasesFromCsv, readCurrentCase
 from CBRFunctions import *
 from kdTree import kdTree
 from flatMemory import flatMemory
+from Case import Case
+from Attributes import RealAttr, CategoricalAttr
 import os
 import sys
+from operator import itemgetter
 
 class CBR(Console):
 
@@ -21,7 +24,8 @@ class CBR(Console):
         self.current_case = None
 
     def do_loadCasesFromCsv(self, args):
-        """Loads the cases from the specified csv file"""
+        """Loads the cases from the specified csv file. Example:
+            loadCasesFromCsv <filename>"""
 
         try:
             params = args.split()
@@ -85,25 +89,48 @@ class CBR(Console):
     def do_newCase(self,args):
         """Introduce a new case to be analyzed"""
         try:
-            intro = 'Introduce a new case following the format of the '\
-                    'previous loaded cases:\n'
             if not self.cases_flat:
                 raise Exception('First you need to load the library of cases')
 
-            user_input = raw_input(intro)
-            input_values = user_input.split(',')
-            if len(input_values) != self.cases_flat.num_dim:
-                raise Exception('wrong input')
+            case0 = self.cases_flat.cases[0]
+            names = case0.attrNames()
+            attributes = {}
+            for n in names:
+                intro = 'Introduce '+n+':\n'
+                v = raw_input(intro)
+                t = case0.attributes[n].attrType()
+                if t == 'r':
+                    attributes[n]= RealAttr(v)
+                if t == 'c':
+                    attributes[n]= CategoricalAttr(v)
 
-            self.current_case = readCurrentCase(input_values,
-                    self.cases_flat.cases[0].types(),
-                    self.cases_flat.cases[0].names())
+            self.current_case = Case(attributes)
         except Exception as error:
             print error
 
     def do_executeCBR(self,args):
-        self.cases_flat.retrieve(self.current_case)
+        similarities = self.cases_flat.retrieve(self.current_case)
+        similarities = zip(xrange(0,len(similarities)), similarities)
+        sorted_similarities =sorted(similarities, key=itemgetter(1))
 
+        print 'RETRIEVE - Results:'
+        print 'The nearest 5 cases are:'
+        sim = [i for i in sorted_similarities[:5]]
+        print sim
+        cases = [case for case in
+                [self.cases_flat.cases[index] for (index,similarity) in sim]]
+        cases_similar = zip(cases,[s[1] for s in sim])
+        print 'Those cases are:'
+        for c in cases:
+            c.printCase()
+        print 'Those cases are:'
+        for c in cases_similar:
+            c[0].printCase()
+            print 'sim: ', c[1]
+        solution = adapt(cases_similar)
+
+        print 'ADAPTATION - Result (Solution):'
+        print solution
 
 if __name__ == "__main__":
     cbr = CBR()
