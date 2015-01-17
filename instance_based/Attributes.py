@@ -10,13 +10,12 @@ class Attribute(object):
         """ Returns the attribute name """
 
     @abstractmethod
-    def similarity(self,value, minimum_v = None, maximum_v = None):
+    def similarity(self, value, minimum_v = None, maximum_v = None):
         """ Returns the attribute name """
 
     @abstractmethod
     def attrType(self):
         """ returns type"""
-
 
 class RealAttr(Attribute):
 
@@ -24,14 +23,12 @@ class RealAttr(Attribute):
         self.__value = float(value)
 
     def askValue(self):
-        """ Returns the attribute name """
         return self.__value
 
     def similarity(self, value, minimum_v, maximum_v):
         ## Normal distance
-        sim = abs(normalize(self.__value,minimum_v, maximum_v)-
-                normalize(value.askValue() ,minimum_v, maximum_v))
-        return sim
+        return abs(normalize(self.__value, minimum_v, maximum_v) -
+                  normalize(value.askValue(), minimum_v, maximum_v))
 
     def attrType(self):
         return 'r'
@@ -42,15 +39,12 @@ class CategoricalAttr(Attribute):
         self.__value = str(value)
 
     def askValue(self):
-        """ Returns the attribute name """
         return self.__value
-
-    def similarity(self,value):
 
     def attrType(self):
         return 'c'
 
-    def similarity(self,value, minimum_v = None, maximum_v = None):
+    def similarity(self, value, minimum_v = None, maximum_v = None):
         ## Equal
         return float(self.__value == value)
 

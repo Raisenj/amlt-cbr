@@ -32,7 +32,7 @@ def readAttrNames(n):
         raise Exception('The number of variables is inconsistent')
 
     variables_names = []
-    for i in xrange(0,n):
+    for i in xrange(0, n):
         variables_names.append(str(variables[i]).strip())
 
     if len(set(variables_names)) != len(variables_names):
@@ -49,8 +49,8 @@ def readSolutionVariable(n):
 
     return solution
 
-def normalize(v,maximum_v,minimum_v):
-    return (v-minimum_v)/(maximum_v-minimum_v)
+def normalize(v, maximum_v, minimum_v):
+    return (v - minimum_v)/(maximum_v - minimum_v)
 
 def adapt(similar_cases):
     labels = list(set([c.labelValue() for (c,s) in similar_cases]))

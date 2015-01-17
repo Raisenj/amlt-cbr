@@ -35,10 +35,7 @@ class Case():
         return types
 
     def attrNames(self):
-        names = []
-        for name in self.attributes.keys():
-            names.append(name)
-        #names.append(self.label.keys()[0])
+        return self.attributes.keys()
         return names
 
     def labelName(self):
@@ -47,21 +44,6 @@ class Case():
     def labelValue(self):
         return self.label[self.label.keys()[0]].askValue()
 
-
-    def similarity(self, case, minimum, maximum):
-        sim = {}
-        for (k,v) in self.attributes.items():
-            try:
-                minimum_v = minimum[k]
-            except KeyError:
-                print 'key error'
-                minimum_v = None
-            try:
-                maximum_v = maximum[k]
-            except KeyError:
-                print 'key error'
-                maximum_v = None
-            sim[k] = v.similarity(case.attributes[k],minimum_v,maximum_v)
-        similarity = sum(sim.values())
-
-        return similarity
+    def similarity(self, case, minimums, maximums):
+        return sum([v.similarity(case.attributes[k], minimums[k], maximums[k])
+            for (k, v) in self.attributes.items()])

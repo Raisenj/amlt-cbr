@@ -38,10 +38,11 @@ def readCasesFromCsv(filename, types, names, label_name):
     with open(filename, 'rb') as csvfile:
         reader = csv.reader(csvfile)
         for row in reader:
-            if len(row) != m:
-                raise Exception('the elements of the csv are not '\
-                        'consistent with the structure provided.')
-            case = readCase(row, types, names, label_name)
-            cases.append(case)
+            if row:
+                if len(row) != m:
+                    raise Exception('the elements of the csv are not '\
+                            'consistent with the structure provided.')
+                case = readCase(row, types, names, label_name)
+                cases.append(case)
     return cases
 

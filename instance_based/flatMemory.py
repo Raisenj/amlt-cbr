@@ -12,7 +12,7 @@ class flatMemory:
             assert(all([case.attributes.keys() == cases[0].attributes.keys()
                 for case in cases]))
         except AssertionError:
-            raise Exception("Invalid library structure to construct kd-tree")
+            raise Exception("Invalid cases")
 
         self.num_cases = len(cases)
         self.num_dim = len(cases[0].attributes)
@@ -20,35 +20,33 @@ class flatMemory:
         self.maximum = {}
         self.minimum = {}
 
-        for (k,v) in cases[0].attributes.items():
-            if isinstance(v,RealAttr):
+        for (k, v) in cases[0].attributes.items():
+            if isinstance(v, RealAttr):
                 self.maximum[k] = float('-inf')
                 self.minimum[k] = float('inf')
+            else:
+                self.maximum[k] = None
+                self.minimum[k] = None
 
         for c in cases:
-            for (k,v) in c.attributes.items():
-                if isinstance(v,RealAttr):
-                    self.minimum[k] = min(self.minimum[k],v.askValue())
-                    self.maximum[k] = max(self.maximum[k],v.askValue())
+            for (k, v) in c.attributes.items():
+                if isinstance(v, RealAttr):
+                    self.minimum[k] = min(self.minimum[k], v.askValue())
+                    self.maximum[k] = max(self.maximum[k], v.askValue())
 
     def __del__(self):
         pass
 
-    def __retrieve(self,case):
-        """ Retrieve the most similar case(s) """
-        similarities = []
-        for c in self.cases:
-            similarities.append(c.similarity(case,self.minimum,self.maximum))
-        return similarities
-
     def retrieve(self,case):
         """ Retrieve the most similar case(s) """
-        return self.__retrieve(case)
+        return [c.similarity(case, self.minimum, self.maximum)
+                    for c in self.cases]
 
     def printFlatMemory(self):
         for c in self.cases:
             c.printCase()
         print '\n Num of cases: %d' % self.num_cases
-    def askCae(self, index):
+
+    def askCase(self, index):
         return self.cases[index]
 

@@ -32,8 +32,7 @@ class CBR(Console):
             if len(params) != 1:
                 raise Exception('wrong numbe of arguments')
 
-            filename = params[0]
-            abspath = checkFilename(filename)
+            abspath = checkFilename(params[0])
 
             info = 'We need to know the kind of attributes present '\
                     'in the csv file.\nIntroduce such types of '\
@@ -109,28 +108,29 @@ class CBR(Console):
             print error
 
     def do_executeCBR(self,args):
-        similarities = self.cases_flat.retrieve(self.current_case)
-        similarities = zip(xrange(0,len(similarities)), similarities)
-        sorted_similarities =sorted(similarities, key=itemgetter(1))
+        try:
+            similarities = self.cases_flat.retrieve(self.current_case)
+            similarities = zip(range(0, len(similarities)), similarities)
+            similarities.sort(key = itemgetter(1))
 
-        print 'RETRIEVE - Results:'
-        print 'The nearest 5 cases are:'
-        sim = [i for i in sorted_similarities[:5]]
-        print sim
-        cases = [case for case in
-                [self.cases_flat.cases[index] for (index,similarity) in sim]]
-        cases_similar = zip(cases,[s[1] for s in sim])
-        print 'Those cases are:'
-        for c in cases:
-            c.printCase()
-        print 'Those cases are:'
-        for c in cases_similar:
-            c[0].printCase()
-            print 'sim: ', c[1]
-        solution = adapt(cases_similar)
+            print 'RETRIEVE - Results:'
+            print 'The nearest 5 cases are:'
+            print similarities[:5]
 
-        print 'ADAPTATION - Result (Solution):'
-        print solution
+            cases = [(self.cases_flat.cases[index], similarity)
+                    for (index, similarity) in similarities[:5]]
+
+            print 'Those cases are:'
+            for (c, s) in cases:
+                c.printCase()
+                print 'sim: ', s
+
+            solution = adapt(cases)
+
+            print 'ADAPTATION - Result (Solution):'
+            print solution
+        except Exception as error:
+            print error
 
 if __name__ == "__main__":
     cbr = CBR()

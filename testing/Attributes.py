@@ -38,12 +38,10 @@ class Attribute(BaseAttribute):
         if hasattr(self, "_matching_set"):
             return self._matching_set
         return self._matching
-    
+
     @matching.setter
     def matching(self,value):
         self._matching_set = value
-
-
 
     @property
     def name(self):
@@ -78,7 +76,9 @@ class Attribute(BaseAttribute):
     def __eq__(self, other):
         """Equality is on all attributes"""
         if isinstance(other, BaseAttribute):
-            return self.name == other.name and self.value == other.value and self.weight == other.weight
+            return  self.name == other.name and
+                    self.value == other.value and
+                    self.weight == other.weight
         else:
             return self.value == other
 
@@ -102,7 +102,7 @@ class Real(Attribute):
         if hasattr(self, "_matching_set"):
             return self._matching_set
         return self._matching
-    
+
     @matching.setter
     def matching(self,value):
         self._matching_set = value
