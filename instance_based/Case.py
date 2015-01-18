@@ -1,6 +1,9 @@
 from Attributes import RealAttr, CategoricalAttr, Attribute
+import numpy
 
 class Case():
+
+    weights = None
 
     def __init__(self, attributes, label=None):
         self.attributes = attributes
@@ -45,5 +48,9 @@ class Case():
         return self.label[self.label.keys()[0]].askValue()
 
     def similarity(self, case, minimums, maximums):
-        return sum([v.similarity(case.attributes[k], minimums[k], maximums[k])
-            for (k, v) in self.attributes.items()])
+        sim = [v.similarity(case.attributes[k], minimums[k], maximums[k])
+                for (k, v) in self.attributes.items()]
+        if self.weights == None:
+            return sum(sim)
+        else:
+            return sum(numpy.array(sim) * numpy.array(self.weights.values())) / sum(self.weights.values())

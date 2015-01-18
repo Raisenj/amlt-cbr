@@ -8,7 +8,6 @@ from Case import Case
 from Attributes import RealAttr, CategoricalAttr
 import os
 import sys
-from operator import itemgetter
 
 class CBR(Console):
 
@@ -19,9 +18,11 @@ class CBR(Console):
 
         self.cases_flat = None
         self.cases_hierarchical = None
+        self.memory = None
         self.solution = None
         self.label_name = None
         self.current_case = None
+        self.K = 1
 
     def do_loadCasesFromCsv(self, args):
         """Loads the cases from the specified csv file. Example:
@@ -30,7 +31,7 @@ class CBR(Console):
         try:
             params = args.split()
             if len(params) != 1:
-                raise Exception('wrong numbe of arguments')
+                raise Exception('wrong number of arguments')
 
             abspath = checkFilename(params[0])
 
@@ -61,15 +62,17 @@ class CBR(Console):
             cases = readCasesFromCsv(abspath, types, names, self.label_name)
 
             self.cases_flat = flatMemory(cases)
-            #self.cases_hierarchical = kdTree(self.cases_flat)
+            self.cases_hierarchical = kdTree(cases)
+            self.memory = self.cases_flat
+
         except Exception as error:
             print error
 
-    def do_printFlatMemory(self, args):
-        """Prints the cases stored at flat memory"""
+    def do_printMemory(self, args):
+        """Prints the cases stored in memory"""
         try:
-            if self.cases_flat:
-                self.cases_flat.printFlatMemory()
+            if self.memory:
+                self.memory.printMemory()
             else:
                 print 'No loaded cases'
         except Exception as error:
@@ -85,10 +88,10 @@ class CBR(Console):
         except Exception as error:
             print error
 
-    def do_newCase(self,args):
+    def do_newCase(self, args):
         """Introduce a new case to be analyzed"""
         try:
-            if not self.cases_flat:
+            if not self.memory:
                 raise Exception('First you need to load the library of cases')
 
             case0 = self.cases_flat.cases[0]
@@ -107,18 +110,56 @@ class CBR(Console):
         except Exception as error:
             print error
 
-    def do_executeCBR(self,args):
+    def do_setRetrieveParameter(self, args):
+        """Set the K parameter for the retrieve phase"""
         try:
-            similarities = self.cases_flat.retrieve(self.current_case)
-            similarities = zip(range(0, len(similarities)), similarities)
-            similarities.sort(key = itemgetter(1))
+            params = args.split()
+            if len(params) != 1:
+                raise Exception('wrong number of arguments')
 
-            print 'RETRIEVE - Results:'
-            print 'The nearest 5 cases are:'
-            print similarities[:5]
+            self.K = int(params[0])
+        except Exception as error:
+            print error
 
-            cases = [(self.cases_flat.cases[index], similarity)
-                    for (index, similarity) in similarities[:5]]
+    def do_setMemoryModel(self, args):
+        """Set the memory model: flat or hierarchical"""
+        try:
+            params = args.split()
+            if len(params) != 1:
+                raise Exception('wrong number of arguments')
+
+            if params[0].lower() == "flat":
+                self.memory = self.cases_flat
+            elif params[0].lower() == "hierarchical":
+                self.memory = self.cases_hierarchical
+            else:
+                raise Exception('invalid option')
+
+        except Exception as error:
+            print error
+
+    def do_setWeights(self, args):
+        """Introduce the weights for each attribute"""
+        try:
+            if not self.memory:
+                raise Exception('First you need to load the library of cases')
+
+            names = self.cases_flat.cases[0].attrNames()
+            weights = {}
+            for n in names:
+                intro = 'Introduce ' + n + ':\n'
+                weights[n] = float(raw_input(intro))
+
+            Case.weights = weights
+
+        except Exception as error:
+            print error
+
+    def do_executeCBR(self, args):
+        """Run CBR"""
+        try:
+            cases = self.memory.retrieve(self.current_case, self.K)
+            #cases2 = self.cases_hierarchical.retrieve(self.current_case, self.K)
 
             print 'Those cases are:'
             for (c, s) in cases:

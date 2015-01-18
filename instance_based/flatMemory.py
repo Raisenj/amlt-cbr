@@ -1,6 +1,7 @@
 from Case import Case
 from Attributes import CategoricalAttr, RealAttr, Attribute
 from CBRFunctions import normalize
+from operator import itemgetter
 
 class flatMemory:
     """ A flt memory implementation """
@@ -37,16 +38,18 @@ class flatMemory:
     def __del__(self):
         pass
 
-    def retrieve(self,case):
+    def retrieve(self, case, k = 1):
         """ Retrieve the most similar case(s) """
-        return [c.similarity(case, self.minimum, self.maximum)
-                    for c in self.cases]
+        similarities = [c.similarity(case, self.minimum, self.maximum)
+                        for c in self.cases]
 
-    def printFlatMemory(self):
+        similarities = zip(range(0, self.num_cases), similarities)
+        similarities.sort(key = itemgetter(1))
+
+        return [(self.cases[index], similarity)
+                for (index, similarity) in similarities[:min(self.num_cases, k)]]
+
+    def printMemory(self):
         for c in self.cases:
             c.printCase()
         print '\n Num of cases: %d' % self.num_cases
-
-    def askCase(self, index):
-        return self.cases[index]
-
