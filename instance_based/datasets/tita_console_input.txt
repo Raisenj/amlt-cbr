@@ -1,0 +1,9 @@
+# titanic enter data
+
+r,r,s,r,r,r,r,s,r,r,s
+
+survived,Pclass,Sex,Age,SibSp,Parch,Fare,Embarked,Price,TicketCount,Title
+
+loadCasesFromCsv datasets/titapostrain.csv
+
+

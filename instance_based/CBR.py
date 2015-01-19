@@ -29,45 +29,45 @@ class CBR(Console):
         """Loads the cases from the specified csv file. Example:
             loadCasesFromCsv <filename>"""
 
-        try:
-            params = args.split()
-            if len(params) != 1:
-                raise Exception('wrong number of arguments')
+        #try:
+        params = args.split()
+        if len(params) != 1:
+            raise Exception('wrong number of arguments')
 
-            abspath = checkFilename(params[0])
+        abspath = checkFilename(params[0])
 
-            info = 'We need to know the kind of attributes present '\
+        info = 'We need to know the kind of attributes present '\
                     'in the csv file.\nIntroduce such types of '\
                     'variables. Example:\n\tr,r,s,c\n'\
                     'In this case the csv file will have 4 columns, '\
                     'being the two first real values, the third a string and the last one'\
                     ' a categorical one.'
-            print '\n',info
-            types = readKindOfAttrs()
+        print '\n',info
+        types = readKindOfAttrs()
 
-            n = len(types)
-            # At this point we know how many colums have the csv and the
-            # kind of variables.
-            info = 'Now we need to know the names of such variables '\
+        n = len(types)
+        # At this point we know how many colums have the csv and the
+        # kind of variables.
+        info = 'Now we need to know the names of such variables '\
                     'and which one is the solution. Example\n\t'\
                     'sepal_l, sepal_w, petal_l, iris_class, 4'
-            names = readAttrNames(n)
+        names = readAttrNames(n)
 
-            info = 'Now we need to know which parameter specifies the '\
+        info = 'Now we need to know which parameter specifies the '\
                     'solution of the case. Indicate that through a '\
                     'number'
-            print '\n',info
-            self.solution = readSolutionVariable(n)
-            self.label_name = names[self.solution - 1]
+        print '\n',info
+        self.solution = readSolutionVariable(n)
+        self.label_name = names[self.solution - 1]
 
-            cases = readCasesFromCsv(abspath, types, names, self.label_name)
+        cases = readCasesFromCsv(abspath, types, names, self.label_name)
 
-            self.cases_flat = flatMemory(cases)
-            self.cases_hierarchical = kdTree(cases)
-            self.memory = self.cases_flat
+        self.cases_flat = flatMemory(cases)
+        self.cases_hierarchical = kdTree(cases)
+        self.memory = self.cases_flat
 
-        except Exception as error:
-            print error
+#        except Exception as error:
+#            print error
 
     def do_printMemory(self, args):
         """Prints the cases stored in memory"""

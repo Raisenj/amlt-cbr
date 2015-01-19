@@ -1,7 +1,7 @@
 #!/usr/bin/python
 #################################################################
 import csv
-from Attributes import RealAttr, CategoricalAttr
+from Attributes import RealAttr, CategoricalAttr, StringAttr
 from Case import Case
 
 def readCurrentCase(row, types, names):
