@@ -174,9 +174,9 @@ class kdTree:
         node.right = new_node.right
         node.left = new_node.left
 
-    def getCategory(self, category):
+    def getCategory(self, classe):
         """ Return all the cases that its label match category """
 
         cases = self.__retrieve_all(self.root)
-        return [case.label.values()[0] for case in cases
-                if case.label.values()[0] == category]
+        return [case for case in cases
+                if case.label.values()[0].askValue() == classe]
