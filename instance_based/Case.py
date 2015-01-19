@@ -73,6 +73,8 @@ class Case():
         sim = [v.similarity(case.attributes[k], minimums[k], maximums[k])
                 for (k, v) in self.attributes.items()]
         if self.weights == None:
+            print 'esto es la similaridad'
+            print sim
             return sum(sim)
         else:
             return sum(numpy.array(sim) * \

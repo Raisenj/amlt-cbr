@@ -1,7 +1,7 @@
 #!/usr/bin/python
 #################################################################
 import csv
-from Attributes import RealAttr, CategoricalAttr
+from Attributes import RealAttr, CategoricalAttr, StringAtrr
 from Case import Case
 
 def readCurrentCase(row, types, names):
@@ -11,6 +11,9 @@ def readCurrentCase(row, types, names):
             attrs[names[i]] = RealAttr(row[i])
         elif types[i] == 'c':
             attrs[names[i]] = CategoricalAttr(row[i])
+        elif types[i] == 's':
+            attrs[names[i]] = StringAttr(row[i])
+
         else:
             raise Exception('wrong item on input')
 
@@ -24,6 +27,9 @@ def readCase(row, types, names, label_name):
             attrs[names[i]] = RealAttr(row[i])
         elif types[i] == 'c':
             attrs[names[i]] = CategoricalAttr(row[i])
+        elif types[i] == 's':
+            attrs[names[i]] = StringAttr(row[i])
+
         else:
             raise Exception('wrong item on input')
 
@@ -45,4 +51,3 @@ def readCasesFromCsv(filename, types, names, label_name):
                 case = readCase(row, types, names, label_name)
                 cases.append(case)
     return cases
-

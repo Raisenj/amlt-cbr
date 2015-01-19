@@ -113,6 +113,7 @@ def stringSim(s1, s2):
         Returns a number between 1 and 0, where 1 is the most similar 
         example: print jarow("martha","marhta") 
         """ 
+        
         m= jarow_m(s1,s2) 
         t1 = jarow_t(s1,s2) 
         t2 = jarow_t(s2,s1) 
@@ -174,4 +175,6 @@ def stringSim(s1, s2):
                 if pos[s] != counter: 
                     t += 1 
             counter += 1 
-        return t 
+        return t
+        
+    return 1-(jarow(s1,s2))
