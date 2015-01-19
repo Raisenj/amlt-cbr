@@ -33,6 +33,7 @@ class kdTree:
             if isinstance(value, CategoricalAttr)]
         self.num_attributes = [name for (name, value) in cases[0].attributes.items()
             if isinstance(value, RealAttr)]
+        self.solutions = cases.solutions
 
         self.minimums = {}
         self.maximums = {}
@@ -173,3 +174,9 @@ class kdTree:
         node.right = new_node.right
         node.left = new_node.left
 
+    def getCategory(self, category):
+        """ Return all the cases that its label match category """
+
+        cases = self.__retrieve_all(self.root)
+        return [case.label.values()[0] for case in cases
+                if case.label.values()[0] == category]
