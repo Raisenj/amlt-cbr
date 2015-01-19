@@ -5,11 +5,14 @@ class Case():
 
     weights = None
 
-    def __init__(self, attributes, label=None):
+    def __init__(self, attributes, label=None, evaluation=None):
         self.attributes = attributes
         self.label = label
         self.utility = 0
-        self.evaluation = True
+        if evaluation!=None:
+            self.evaluation = evaluation
+        else:
+            self.evaluation = True
 
     def __del__(self):
         pass
@@ -26,6 +29,8 @@ class Case():
                 print k, ': ',  self.label[k].askValue()
         else:
             print 'no label'
+
+        print 'Utility: ', self.utility
         print '=================='
 
     def types(self):

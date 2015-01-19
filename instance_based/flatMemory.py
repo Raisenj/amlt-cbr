@@ -46,8 +46,17 @@ class flatMemory:
         similarities = zip(range(0, self.num_cases), similarities)
         similarities.sort(key = itemgetter(1))
 
-        return [(self.cases[index], similarity)
-                for (index, similarity) in similarities[:min(self.num_cases, k)]]
+        return [(self.cases[index],sim) for (index,sim) in similarities[:min(self.num_cases, k)]]
+
+
+    def retain(self, case):
+        self.cases.append(case)
+        for (k,v) in case.attributes.items():
+            if isinstance(v, RealAttr):
+                self.minimum[k] = min(self.minimum[k],case.attributes[k].askValue())
+                self.maximum[k] = max(self.maximum[k], case.attributes[k].askValue())
+        self.num_cases +=1
+
 
     def printMemory(self):
         for c in self.cases:

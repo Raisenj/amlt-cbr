@@ -62,7 +62,7 @@ def adapt(similar_cases):
         if c.evaluation == True:
             if s == 0:
                 exactMatch = (True,c.labelValue())
-                return
+                break
             else:
                 labels_punct[c.labelValue()] += (100/(s*s) + c.utility)
         else:
@@ -76,3 +76,53 @@ def adapt(similar_cases):
             labels_punct.pop(exactMatch[1])
     solution = max(labels_punct.iteritems(), key=itemgetter(1))[0]
     return solution
+
+def evaluate(label_solution, cases_retrieved):
+    input = 'Introduce the real solution:'
+    real_solution = raw_input(input)
+    if label_solution.lower() == real_solution.lower():
+        for c in cases_retrieved:
+            c.utility += 1 
+        return True
+    else:
+        for c in cases_retrieved:
+            c.utility -= 1 
+        return False
+
+def retain(case):
+    return True
+
+
+# FIXME: Miguel function pasted
+#def retain(solution_case, solution_label, kcase, csvpath):
+#    """
+#    Retain process. At the moment working with only ONE case match
+#    """
+#    # 0.0 similarity means the case presented to he cbr is already in its DB and
+#    # we will not enter retain process.
+#   
+#    print '\nWelcome to Retain Phase'
+#    newDataRow = []
+#    match = False
+#    for k in solution_case.attributes.keys():
+#        newDataRow.append(str(solution_case.attributes[k].askValue()))
+#    newDataRow.append(solution_label)  # Put the solution case in csv style to check vs whole dataset.csv
+#        
+#    print 'This was the new case: '+ str(newDataRow)
+#    with open(csvpath, 'rb') as csvfile:
+#        reader = csv.reader(csvfile)
+#        for line in reader:
+#            if newDataRow[0:4] == line[0:4]:
+#                # Check if the cbr has given the correct label
+#                match = True
+#                break
+#                    
+#        if match == True and newDataRow[-1] == line[-1]:
+#                        
+#            print "\nThe expert says: The CBR did a good job, this case corresponds to this label"
+#            kcase.utility += 1
+#            kcase.printCase()     
+#            ## OPTIONAL: Add the solution_case to the database of cases.
+#        else:
+#            print '\nThe expert says: The CBR did not match this values to the correct class'   
+#            ## OPTIONAL: Reduce utility of retrieved case  
