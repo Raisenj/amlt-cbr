@@ -139,18 +139,18 @@ class kdTree:
         if case.attributes[attribute_name].askValue() <= threshold:
             left = node.left
             if left.num_instances < k:
-                return self.__retrieve_all(node)
+                return (self.__retrieve_all(node), node)
             return self.__retrieve(case, left, k)
         else:
             right = node.right
             if right.num_instances < k:
-                return self.__retrieve_all(node)
+                return (self.__retrieve_all(node), node)
             return self.__retrieve(case, right, k)
 
     def retrieve(self, case, k = 1):
         """ Retrieve the most similar cases(s) """
 
-        retrieved_cases = self.__retrieve(case, self.root, k)
+        (retrieved_cases, _) = self.__retrieve(case, self.root, k)
         n = len(retrieved_cases)
 
         similarities = [c.similarity(case, self.minimums, self.maximums)
@@ -160,3 +160,16 @@ class kdTree:
 
         return [(retrieved_cases[index], similarity)
                 for (index, similarity) in similarities[:min(n, k)]]
+
+    def retain(self, case):
+        """ Retain the given case """
+
+        (cases, node) = self.__retrieve(case, self.root, 1)
+        cases.append(case)
+
+        new_node = self.__construct_tree(cases)
+        node.data = new_node.data
+        node.num_instances = new_node.num_instances
+        node.right = new_node.right
+        node.left = new_node.left
+
