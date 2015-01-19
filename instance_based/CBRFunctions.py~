@@ -94,7 +94,7 @@ def retain(case):
 
 def stringSim(s1, s2):
     """
-    Calculates Jarow-Winkler string similiarity, returns
+    Calculates Jaro-Wrinkler string similiarity, returns
     a similarity value between 0 and 1
     """
     def jarow(s1,s2): 
