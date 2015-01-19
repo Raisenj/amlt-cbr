@@ -54,7 +54,7 @@ class CategoricalAttr(Attribute):
 
     def similarity(self, value, minimum_v = None, maximum_v = None):
         ## Equal
-        return float(self.__value == value)
+        return (1-float(self.__value == value.askValue))
 
 class StringAttr(Attribute):
 
