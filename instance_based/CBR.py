@@ -228,7 +228,7 @@ class CBR(Console):
             dataset[t] = self.memory.getCases(t)
 
         test1(self.memory, dataset)
-        test2()
+        test2(self.memory, dataset)
         test3()
         test4()
         test5()

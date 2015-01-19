@@ -91,6 +91,17 @@ def adapt(similar_cases, labels):
 def evaluate(label_solution, cases_retrieved):
     input = 'Introduce the real solution:'
     real_solution = raw_input(input)
+    evaluateA(label_solution, real_solution, cases_retrieved)
+    #if label_solution.lower() == real_solution.lower():
+    #    for c in cases_retrieved:
+    #        c.utility += 1 
+    #    return True
+    #else:
+    #    for c in cases_retrieved:
+    #        c.utility -= 1 
+    #    return False
+
+def evaluateA(label_solution, real_solution, cases_retrieved):
     if label_solution.lower() == real_solution.lower():
         for c in cases_retrieved:
             c.utility += 1 
