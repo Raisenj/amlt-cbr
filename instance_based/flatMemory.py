@@ -20,6 +20,7 @@ class flatMemory:
         self.cases = cases
         self.maximum = {}
         self.minimum = {}
+        self.solutions = []
 
         for (k, v) in cases[0].attributes.items():
             if isinstance(v, RealAttr):
@@ -34,6 +35,10 @@ class flatMemory:
                 if isinstance(v, RealAttr):
                     self.minimum[k] = min(self.minimum[k], v.askValue())
                     self.maximum[k] = max(self.maximum[k], v.askValue())
+            for k in c.label.values():
+                if not k.askValue() in self.solutions:
+                    self.solutions.append(k.askValue())
+
 
     def __del__(self):
         pass
@@ -50,15 +55,30 @@ class flatMemory:
 
 
     def retain(self, case):
-        self.cases.append(case)
-        for (k,v) in case.attributes.items():
-            if isinstance(v, RealAttr):
-                self.minimum[k] = min(self.minimum[k],case.attributes[k].askValue())
-                self.maximum[k] = max(self.maximum[k], case.attributes[k].askValue())
-        self.num_cases +=1
+        found = False
+        for c in self.cases:
+            if c.compare(case):
+                found = True
+
+        if not found:
+            self.cases.append(case)
+
+            for (k,v) in case.attributes.items():
+                if isinstance(v, RealAttr):
+                    self.minimum[k] = min(self.minimum[k],case.attributes[k].askValue())
+                    self.maximum[k] = max(self.maximum[k], case.attributes[k].askValue())
+            for k in case.label.values():
+                if not k.askValue() in self.solutions:
+                    self.solutions.append(k.askValue())
+    
+            self.num_cases +=1
+
 
 
     def printMemory(self):
         for c in self.cases:
             c.printCase()
         print '\n Num of cases: %d' % self.num_cases
+        print '\n Max: ', self.maximum
+        print '\n Min: ', self.minimum
+

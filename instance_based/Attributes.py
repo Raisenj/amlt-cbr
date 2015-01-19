@@ -17,11 +17,19 @@ class Attribute(object):
     def attrType(self):
         """ returns type"""
 
+    def __eq__(self,real):
+            if self.__value == real.__value:
+                return True
+            else:
+                return False
+
+
 class RealAttr(Attribute):
 
     def __init__(self, value):
         self.__value = float(value)
 
+        
     def askValue(self):
         return self.__value
 

@@ -17,6 +17,19 @@ class Case():
     def __del__(self):
         pass
 
+    def compare(self,case):
+        for (k,v) in self.attributes.items():
+            if self.attributes[k].askValue() != case.attributes[k].askValue():
+                return False
+        for (k,v) in self.label.items():
+            if  self.label[k].askValue() != case.label[k].askValue():
+                return False
+            if self.evaluation != case.evaluation:
+                return False 
+        return True
+
+
+        
     def printCase(self):
         print '\n'
         print '====== CASE ======'
@@ -31,6 +44,7 @@ class Case():
             print 'no label'
 
         print 'Utility: ', self.utility
+        print 'Evaluation: ', self.evaluation
         print '=================='
 
     def types(self):
@@ -58,4 +72,6 @@ class Case():
         if self.weights == None:
             return sum(sim)
         else:
-            return sum(numpy.array(sim) * numpy.array(self.weights.values())) / sum(self.weights.values())
+            return sum(numpy.array(sim) * \
+                    numpy.array(self.weights.values())) / \
+            sum(self.weights.values())

@@ -70,13 +70,13 @@ class CBR(Console):
 
     def do_printMemory(self, args):
         """Prints the cases stored in memory"""
-    #try:
-        if self.memory:
-            self.memory.printMemory()
-        else:
-            print 'No loaded cases'
-    #except Exception as error:
-        #print error
+        try:
+            if self.memory:
+                self.memory.printMemory()
+            else:
+                print 'No loaded cases'
+        except Exception as error:
+            print error
 
     def do_printCurrentCase(self, args):
         """Prints the current case"""
@@ -169,7 +169,7 @@ class CBR(Console):
             c.printCase()
             print 'sim: ', s
 
-        sol_label = adapt(cases)
+        sol_label = adapt(cases, self.memory.solutions)
         print 'ADAPTATION - Result (Solution):'
         print sol_label
 
