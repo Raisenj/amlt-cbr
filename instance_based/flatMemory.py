@@ -74,8 +74,8 @@ class flatMemory:
             self.num_cases +=1
 
     def getCases(self, classe):
-        return [case for cases in self.cases
-                    if case.label.values()[0].askValue() == classe]
+        return [case for case in self.cases
+                if case.label.values()[0].askValue() == classe]
 
     def printMemory(self):
         for c in self.cases:
