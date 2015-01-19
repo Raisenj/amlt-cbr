@@ -20,7 +20,7 @@ def readKindOfAttrs():
     n = len(variables)
     variables_types = []
     for i in xrange(0, n):
-        if not str(variables[i]).strip() in ['r','c']:
+        if not str(variables[i]).strip() in ['r','c','s']:
             raise Exception('wrong input')
         variables_types.append(str(variables[i]).strip())
     return variables_types

@@ -5,7 +5,7 @@ from CBRFunctions import *
 from kdTree import kdTree
 from flatMemory import flatMemory
 from Case import Case
-from Attributes import RealAttr, CategoricalAttr
+from Attributes import RealAttr, CategoricalAttr, StringAttr
 import os
 import sys
 
@@ -37,9 +37,9 @@ class CBR(Console):
 
             info = 'We need to know the kind of attributes present '\
                     'in the csv file.\nIntroduce such types of '\
-                    'variables. Example:\n\tr,r,r,c\n'\
+                    'variables. Example:\n\tr,r,s,c\n'\
                     'In this case the csv file will have 4 columns, '\
-                    'being the three first real values and the last one'\
+                    'being the two first real values, the third a string and the last one'\
                     ' a categorical one.'
             print '\n',info
             types = readKindOfAttrs()
@@ -105,6 +105,8 @@ class CBR(Console):
                     attributes[n]= RealAttr(v)
                 if t == 'c':
                     attributes[n]= CategoricalAttr(v)
+                if t == 's':
+                    attributes[n] = StringAttr(v)
 
             self.current_case = Case(attributes)
         except Exception as error:
@@ -202,6 +204,17 @@ class CBR(Console):
                     case = Case(self.current_case.attributes, 
                         { self.cases_flat.cases[0].label.keys()[0] : 
                             CategoricalAttr(sol_label)})
+
+            elif attrType == 's':
+                if not result:
+                    case = Case(self.current_case.attributes, 
+                        { self.cases_flat.cases[0].label.keys()[0] : 
+                            StringAttr(sol_label)},False)
+                else:
+                    case = Case(self.current_case.attributes, 
+                        { self.cases_flat.cases[0].label.keys()[0] : 
+                            StringAttr(sol_label)})
+
 
             self.memory.retain(case)
 

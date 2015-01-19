@@ -1,4 +1,4 @@
-from Attributes import RealAttr, CategoricalAttr, Attribute
+from Attributes import RealAttr, CategoricalAttr, Attribute, StringAttr
 import numpy
 
 class Case():
@@ -54,6 +54,9 @@ class Case():
                 types.append('r')
             elif isinstance(self.attributes[k],CategoricalAttr):
                 types.append('c')
+            elif isinstance(self.attributes[k],StringAttr):
+                types.append('s')
+
         return types
 
     def attrNames(self):

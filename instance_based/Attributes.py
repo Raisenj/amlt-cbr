@@ -1,5 +1,5 @@
 from abc import ABCMeta, abstractproperty, abstractmethod
-from CBRFunctions import normalize
+from CBRFunctions import normalize, stringSim
 import numpy
 
 class Attribute(object):
@@ -55,5 +55,20 @@ class CategoricalAttr(Attribute):
     def similarity(self, value, minimum_v = None, maximum_v = None):
         ## Equal
         return float(self.__value == value)
+
+class StringAttr(Attribute):
+
+    def __init__(self, value):
+        self.__value = str(value)
+
+    def askValue(self):
+        return self.__value
+
+    def attrType(self):
+        return 's'
+
+    def similarity(self, value, minimum_v = None, maximum_v = None):
+        return stringSim(self.__value, value.askValue())
+
 
 
