@@ -226,12 +226,39 @@ class CBR(Console):
         dataset = {}
         for t in types:
             dataset[t] = self.memory.getCases(t)
+    
+        trues = []
+        falses = []
+        (t,f) = test1(self.memory, dataset)
+        trues.append(t)
+        falses.append(f)
+        (t,f) = test2(self.memory, dataset)
+        trues.append(t)
+        falses.append(f)
+        (t,f) = test3(self.memory, dataset)
+        trues.append(t)
+        falses.append(f)
+        (t,f) = test4(self.memory, dataset)
+        trues.append(t)
+        falses.append(f)
+        (t,f) = test5(self.memory, dataset)
+        trues.append(t)
+        falses.append(f)
+        (t,f) = test6(self.memory, dataset)
+        trues.append(t)
+        falses.append(f)
+        (t,f) = test7(self.memory, dataset)
+        trues.append(t)
+        falses.append(f)
+        (t,f) = test8(self.memory, dataset)
+        trues.append(t)
+        falses.append(f)
+        (t,f) = test9(self.memory, dataset)
+        trues.append(t)
+        falses.append(f)
 
-        test1(self.memory, dataset)
-        test2(self.memory, dataset)
-        test3()
-        test4()
-        test5()
+        print 'trues: ', trues
+        print 'falses: ', falses
 
 
 

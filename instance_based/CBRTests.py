@@ -21,6 +21,90 @@ def buildTTCases(memory,datasets, ratio):
 
 def test1(memory, datasets):
     print 'test 1 (ratio 8/10):'
+    ratio = float(1./10.)
+    (cases,test_cases) = buildTTCases(memory, datasets,ratio)
+    print 'len cases: ', len(cases)
+    print 'len test_cases: ', len(test_cases)
+    memory = flatMemory(cases)
+    settings = {}
+    settings['k'] = 5
+    (trues, falses) = executeCBR(memory, test_cases,settings)
+    return (trues,falses)
+
+def test2(memory, datasets):
+    print 'test 2 (ratio 2/10):'
+    ratio = float(2./10.)
+    (cases,test_cases) = buildTTCases(memory, datasets,ratio)
+    print 'len cases: ', len(cases)
+    print 'len test_cases: ', len(test_cases)
+    memory = flatMemory(cases)
+    settings = {}
+    settings['k'] = 5
+    (trues,falses) = executeCBR(memory, test_cases,settings)
+    return (trues,falses)
+
+def test3(memory, datasets):
+    print 'test 3 (ratio 3/10):'
+    ratio = float(3./10.)
+    (cases,test_cases) = buildTTCases(memory, datasets,ratio)
+    print 'len cases: ', len(cases)
+    print 'len test_cases: ', len(test_cases)
+    memory = flatMemory(cases)
+    settings = {}
+    settings['k'] = 5
+    (trues,falses) = executeCBR(memory, test_cases,settings)
+    return (trues,falses)
+
+def test4(memory, datasets):
+    print 'test 4 (ratio 4/10):'
+    ratio = float(4./10.)
+    (cases,test_cases) = buildTTCases(memory, datasets,ratio)
+    print 'len cases: ', len(cases)
+    print 'len test_cases: ', len(test_cases)
+    memory = flatMemory(cases)
+    settings = {}
+    settings['k'] = 5
+    (trues,falses) = executeCBR(memory, test_cases,settings)
+    return (trues,falses)
+
+def test5(memory, datasets):
+    print 'test 5 (ratio 5/10):'
+    ratio = float(5./10.)
+    (cases,test_cases) = buildTTCases(memory, datasets,ratio)
+    print 'len cases: ', len(cases)
+    print 'len test_cases: ', len(test_cases)
+    memory = flatMemory(cases)
+    settings = {}
+    settings['k'] = 5
+    (trues,falses) = executeCBR(memory, test_cases,settings)
+    return (trues,falses)
+
+def test6(memory, datasets):
+    print 'test 6 (ratio 6/10):'
+    ratio = float(6./10.)
+    (cases,test_cases) = buildTTCases(memory, datasets,ratio)
+    print 'len cases: ', len(cases)
+    print 'len test_cases: ', len(test_cases)
+    memory = flatMemory(cases)
+    settings = {}
+    settings['k'] = 5
+    (trues,falses) = executeCBR(memory, test_cases,settings)
+    return (trues,falses)
+
+def test7(memory, datasets):
+    print 'test 7 (ratio 7/10):'
+    ratio = float(7./10.)
+    (cases,test_cases) = buildTTCases(memory, datasets,ratio)
+    print 'len cases: ', len(cases)
+    print 'len test_cases: ', len(test_cases)
+    memory = flatMemory(cases)
+    settings = {}
+    settings['k'] = 5
+    (trues,falses) = executeCBR(memory, test_cases,settings)
+    return (trues,falses)
+
+def test8(memory, datasets):
+    print 'test 8 (ratio 8/10):'
     ratio = float(8./10.)
     (cases,test_cases) = buildTTCases(memory, datasets,ratio)
     print 'len cases: ', len(cases)
@@ -28,10 +112,11 @@ def test1(memory, datasets):
     memory = flatMemory(cases)
     settings = {}
     settings['k'] = 5
-    executeCBR(memory, test_cases,settings)
+    (trues,falses) = executeCBR(memory, test_cases,settings)
+    return (trues,falses)
 
-def test2(memory, datasets):
-    print 'test 2 (ratio 9/10):'
+def test9(memory, datasets):
+    print 'test 9 (ratio 9/10):'
     ratio = float(9./10.)
     (cases,test_cases) = buildTTCases(memory, datasets,ratio)
     print 'len cases: ', len(cases)
@@ -39,14 +124,9 @@ def test2(memory, datasets):
     memory = flatMemory(cases)
     settings = {}
     settings['k'] = 5
-    executeCBR(memory, test_cases,settings)
+    (trues,falses) = executeCBR(memory, test_cases,settings)
+    return (trues,falses)
 
-def test3():
-    print 'test 3:'
-def test4():
-    print 'test 4:'
-def test5():
-    print 'test 5:'
 
 def executeCBR(memory,test_cases,settings=None):
     trues = 0
@@ -95,6 +175,7 @@ def executeCBR(memory,test_cases,settings=None):
             memory.retain(case)
     print 'trues: ', trues
     print 'falses: ', falses
+    return (trues,falses)
 
 
         

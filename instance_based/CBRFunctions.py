@@ -85,7 +85,7 @@ def adapt(similar_cases, labels):
                 new_labels.remove(exactMatch[1])
                 solution = new_labels[random.randint(0,len(new_labels)-1)]
                 return solution
-    solution = min(labels_punct.iteritems(), key=itemgetter(1))[0]
+    solution = max(labels_punct.iteritems(), key=itemgetter(1))[0]
     return solution
 
 def evaluate(label_solution, cases_retrieved):
