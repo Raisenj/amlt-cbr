@@ -68,7 +68,6 @@ class StringAttr(Attribute):
         return 's'
 
     def similarity(self, value, minimum_v = None, maximum_v = None):
-        print ' result of similarity'
         #print stringSim(self.__value, value.askValue())
         return stringSim(self.__value, value.askValue())
 

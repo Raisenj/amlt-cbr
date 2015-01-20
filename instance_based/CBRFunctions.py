@@ -102,7 +102,7 @@ def evaluate(label_solution, cases_retrieved):
     #    return False
 
 def evaluateA(label_solution, real_solution, cases_retrieved):
-    if label_solution.lower() == real_solution.lower():
+    if label_solution == real_solution:
         for c in cases_retrieved:
             c.utility += 1 
         return True

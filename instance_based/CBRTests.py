@@ -20,7 +20,7 @@ def buildTTCases(memory,datasets, ratio):
     return (cases, test_cases)
 
 def test1(memory, datasets):
-    print 'test 1 (ratio 8/10):'
+    print 'test 1 (ratio 1/10):'
     ratio = float(1./10.)
     (cases,test_cases) = buildTTCases(memory, datasets,ratio)
     print 'len cases: ', len(cases)
