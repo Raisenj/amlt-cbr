@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014/MacPorts 2014_1) (preloaded format=pdflatex 2014.11.7)  20 JAN 2015 22:04
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014/MacPorts 2014_1) (preloaded format=pdflatex 2014.11.7)  20 JAN 2015 22:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -313,118 +313,73 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
 {/opt/local/var/db/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-Overfull \hbox (53.90552pt too wide) in paragraph at lines 64--64
-[]    \OT1/cmtt/m/n/10.95 executeCBR  hist              printCurrentCase  setRe
-trieveParameter[] 
- []
-
-
-Overfull \hbox (1.68088pt too wide) in paragraph at lines 66--67
-[]\OT1/cmr/m/n/10.95 For more in-for-ma-tion about a com-mand just type: $[]$.
- []
-
-
-Overfull \hbox (2.16733pt too wide) in paragraph at lines 80--80
-[]    \OT1/cmtt/m/n/10.95 three first real values and the last one a categorica
-l one.[] 
- []
-
-
-Overfull \hbox (13.6647pt too wide) in paragraph at lines 101--101
-[]    \OT1/cmtt/m/n/10.95 Now we need to know which parameter specifies the sol
-ution of[] 
- []
-
-[2]
-Overfull \hbox (2.50378pt too wide) in paragraph at lines 124--126
-\OT1/cmr/m/n/10.95 from one to an-other use the \OT1/cmtt/m/n/10.95 setMemoryMo
-del (flat | hierarchical) \OT1/cmr/m/n/10.95 com-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 124--126
-
- []
-
-[3] [4]
-Underfull \hbox (badness 10000) in paragraph at lines 201--203
-
- []
-
-
-Overfull \hbox (6.24466pt too wide) in paragraph at lines 218--219
-[]\OT1/cmr/m/n/10.95 After this step, the sys-tem takes con-trol of the re-main
--ing eval-u-a-tion/retain
- []
-
-[5]
-Overfull \hbox (5.30252pt too wide) in paragraph at lines 232--233
+Overfull \hbox (5.30252pt too wide) in paragraph at lines 48--49
 \OT1/cmr/m/n/10.95 first ver-sion of AICS ships with the fol-low-ing at-tribute
  types: \OT1/cmtt/m/n/10.95 RealAttribute\OT1/cmr/m/n/10.95 ,
  []
 
-[6]
-Overfull \hbox (3.20293pt too wide) in paragraph at lines 249--250
+[2]
+Overfull \hbox (3.20293pt too wide) in paragraph at lines 65--66
 []\OT1/cmr/m/n/10.95 In the case of cat-e-gor-i-cal at-tributes, the sim-i-lar-
 ity is just check-ing whether
  []
 
-[7] [8] <images/iris.png, id=89, 578.16pt x 433.62pt>
+[3] [4] <images/iris.png, id=68, 578.16pt x 433.62pt>
 File: images/iris.png Graphic file (type png)
  <use images/iris.png>
-Package pdftex.def Info: images/iris.png used on input line 284.
+Package pdftex.def Info: images/iris.png used on input line 100.
 (pdftex.def)             Requested size: 251.9989pt x 188.9937pt.
 
-<images/iris_p_bo.png, id=91, 578.16pt x 433.62pt>
+<images/iris_p_bo.png, id=70, 578.16pt x 433.62pt>
 File: images/iris_p_bo.png Graphic file (type png)
  <use images/iris_p_bo.png>
-Package pdftex.def Info: images/iris_p_bo.png used on input line 291.
+Package pdftex.def Info: images/iris_p_bo.png used on input line 107.
 (pdftex.def)             Requested size: 251.9989pt x 188.9937pt.
 
-[9] <images/titanic.png, id=106, 578.16pt x 433.62pt>
+[5 <./images/iris.png>] <images/titanic.png, id=86, 578.16pt x 433.62pt>
 File: images/titanic.png Graphic file (type png)
- <use images/titanic.png>
-Package pdftex.def Info: images/titanic.png used on input line 304.
-(pdftex.def)             Requested size: 251.9989pt x 188.9937pt.
 
-<images/titanic_p_bo.png, id=107, 578.16pt x 433.62pt>
+<use images/titanic.png>
+Package pdftex.def Info: images/titanic.png used on input line 120.
+(pdftex.def)             Requested size: 251.9989pt x 188.9937pt.
+ <images/titanic_p_bo.png, id=87, 578.16pt x 433.62pt>
 File: images/titanic_p_bo.png Graphic file (type png)
 
 <use images/titanic_p_bo.png>
-Package pdftex.def Info: images/titanic_p_bo.png used on input line 311.
+Package pdftex.def Info: images/titanic_p_bo.png used on input line 127.
 (pdftex.def)             Requested size: 251.9989pt x 188.9937pt.
- <images/tk10.png, id=114, 578.16pt x 433.62pt>
+ <images/tk10.png, id=94, 578.16pt x 433.62pt>
 File: images/tk10.png Graphic file (type png)
 
 <use images/tk10.png>
-Package pdftex.def Info: images/tk10.png used on input line 322.
+Package pdftex.def Info: images/tk10.png used on input line 138.
 (pdftex.def)             Requested size: 251.9989pt x 188.9937pt.
- <images/tk10_p_bo.png, id=115, 578.16pt x 433.62pt>
+ <images/tk10_p_bo.png, id=95, 578.16pt x 433.62pt>
 File: images/tk10_p_bo.png Graphic file (type png)
 
 <use images/tk10_p_bo.png>
-Package pdftex.def Info: images/tk10_p_bo.png used on input line 329.
+Package pdftex.def Info: images/tk10_p_bo.png used on input line 145.
 (pdftex.def)             Requested size: 251.9989pt x 188.9937pt.
- [10 <./images/iris.png>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 343.
- [11 <./images/iris_p_bo.png>] [12 <./images/titanic.png> <./images/titanic_p_b
-o.png>] [13 <./images/tk10.png> <./images/tk10_p_bo.png>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 343.
+ [6 <./images/iris_p_bo.png>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 159.
+ [7 <./images/titanic.png>] [8 <./images/titanic_p_bo.png> <./images/tk10.png>]
+ [9 <./images/tk10_p_bo.png>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 159.
  (./tdocument.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 343.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 343.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 159.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 159.
 Package rerunfilecheck Info: File `tdocument.out' has not changed.
-(rerunfilecheck)             Checksum: 015047123B6F319BDC648536ABF0D9C8;622.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 343.
+(rerunfilecheck)             Checksum: 16E9F15FFA7035E84166D4E433D6AF68;570.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 159.
  ) 
 Here is how much of TeX's memory you used:
- 6098 strings out of 494963
- 87208 string characters out of 6179479
- 167171 words of memory out of 5000000
- 9233 multiletter control sequences out of 15000+600000
- 12063 words of font info for 47 fonts, out of 8000000 for 9000
+ 6089 strings out of 494963
+ 87127 string characters out of 6179479
+ 165165 words of memory out of 5000000
+ 9230 multiletter control sequences out of 15000+600000
+ 11727 words of font info for 45 fonts, out of 8000000 for 9000
  40 hyphenation exceptions out of 8191
- 29i,6n,28p,777b,442s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 29i,6n,28p,796b,326s stack positions out of 5000i,500n,10000p,200000b,80000s
 </opt/local/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx12.pfb></o
 pt/local/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi10.pfb></opt/lo
 cal/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr10.pfb></opt/local/sh
@@ -433,10 +388,10 @@ xmf-texlive/fonts/type1/public/amsfonts/cm/cmr17.pfb></opt/local/share/texmf-te
 xlive/fonts/type1/public/amsfonts/cm/cmti10.pfb></opt/local/share/texmf-texlive
 /fonts/type1/public/amsfonts/cm/cmtt10.pfb></opt/local/share/texmf-texlive/font
 s/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on tdocument.pdf (13 pages, 250828 bytes).
+Output written on tdocument.pdf (9 pages, 237834 bytes).
 PDF statistics:
- 180 PDF objects out of 1000 (max. 8388607)
- 143 compressed objects within 2 object streams
- 31 named destinations out of 1000 (max. 500000)
- 119 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 158 PDF objects out of 1000 (max. 8388607)
+ 125 compressed objects within 2 object streams
+ 26 named destinations out of 1000 (max. 500000)
+ 111 words of extra memory for PDF output out of 10000 (max. 10000000)
 

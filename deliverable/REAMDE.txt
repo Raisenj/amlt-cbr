@@ -5,3 +5,5 @@ executable --> contains a README.txt specifying how to execute the CBR tool.
 source_code --> contains the source code
 technical_document --> contains the technical information
 user_manual --> contains the user manual to use the CBR tool.
+
+Work Organization: This tool was developed by Miguel Betanzos, Guillem Blanco and Jonatan Moreno. There is not and splitted organization, i.e., all three authors have been working in all parts.
