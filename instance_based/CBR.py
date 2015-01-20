@@ -250,12 +250,12 @@ class CBR(Console):
         (t,f) = test7(self.memory, dataset)
         trues.append(t)
         falses.append(f)
-        (t,f) = test8(self.memory, dataset)
-        trues.append(t)
-        falses.append(f)
-        (t,f) = test9(self.memory, dataset)
-        trues.append(t)
-        falses.append(f)
+        #(t,f) = test8(self.memory, dataset)
+        #trues.append(t)
+        #falses.append(f)
+        #(t,f) = test9(self.memory, dataset)
+        #trues.append(t)
+        #falses.append(f)
 
         print 'trues: ', trues
         print 'falses: ', falses

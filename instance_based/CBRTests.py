@@ -27,7 +27,7 @@ def test1(memory, datasets):
     print 'len test_cases: ', len(test_cases)
     memory = flatMemory(cases)
     settings = {}
-    settings['k'] = 5
+    settings['k'] = 10
     (trues, falses) = executeCBR(memory, test_cases,settings)
     return (trues,falses)
 
@@ -39,7 +39,7 @@ def test2(memory, datasets):
     print 'len test_cases: ', len(test_cases)
     memory = flatMemory(cases)
     settings = {}
-    settings['k'] = 5
+    settings['k'] = 10
     (trues,falses) = executeCBR(memory, test_cases,settings)
     return (trues,falses)
 
@@ -51,7 +51,7 @@ def test3(memory, datasets):
     print 'len test_cases: ', len(test_cases)
     memory = flatMemory(cases)
     settings = {}
-    settings['k'] = 5
+    settings['k'] = 10
     (trues,falses) = executeCBR(memory, test_cases,settings)
     return (trues,falses)
 
@@ -63,7 +63,7 @@ def test4(memory, datasets):
     print 'len test_cases: ', len(test_cases)
     memory = flatMemory(cases)
     settings = {}
-    settings['k'] = 5
+    settings['k'] = 10
     (trues,falses) = executeCBR(memory, test_cases,settings)
     return (trues,falses)
 
@@ -75,7 +75,7 @@ def test5(memory, datasets):
     print 'len test_cases: ', len(test_cases)
     memory = flatMemory(cases)
     settings = {}
-    settings['k'] = 5
+    settings['k'] = 10
     (trues,falses) = executeCBR(memory, test_cases,settings)
     return (trues,falses)
 
@@ -87,7 +87,7 @@ def test6(memory, datasets):
     print 'len test_cases: ', len(test_cases)
     memory = flatMemory(cases)
     settings = {}
-    settings['k'] = 5
+    settings['k'] = 10
     (trues,falses) = executeCBR(memory, test_cases,settings)
     return (trues,falses)
 
@@ -99,7 +99,7 @@ def test7(memory, datasets):
     print 'len test_cases: ', len(test_cases)
     memory = flatMemory(cases)
     settings = {}
-    settings['k'] = 5
+    settings['k'] = 10
     (trues,falses) = executeCBR(memory, test_cases,settings)
     return (trues,falses)
 
@@ -111,7 +111,7 @@ def test8(memory, datasets):
     print 'len test_cases: ', len(test_cases)
     memory = flatMemory(cases)
     settings = {}
-    settings['k'] = 5
+    settings['k'] = 10
     (trues,falses) = executeCBR(memory, test_cases,settings)
     return (trues,falses)
 
@@ -123,7 +123,7 @@ def test9(memory, datasets):
     print 'len test_cases: ', len(test_cases)
     memory = flatMemory(cases)
     settings = {}
-    settings['k'] = 5
+    settings['k'] = 10
     (trues,falses) = executeCBR(memory, test_cases,settings)
     return (trues,falses)
 
