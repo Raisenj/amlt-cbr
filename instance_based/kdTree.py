@@ -179,7 +179,7 @@ class kdTree:
         node.right = new_node.right
         node.left = new_node.left
 
-    def getCategory(self, classe):
+    def getCases(self, classe):
         """ Return all the cases that its label match category """
 
         cases = self.__retrieve_all(self.root)
