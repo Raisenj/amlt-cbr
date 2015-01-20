@@ -1,0 +1,7 @@
+FOLDERS
+
+datasets --> contains a README.txt specifying how to use the datasets
+executable --> contains a README.txt specifying how to execute the CBR tool.
+source_code --> contains the source code
+technical_document --> contains the technical information
+user_manual --> contains the user manual to use the CBR tool.
