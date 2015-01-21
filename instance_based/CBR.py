@@ -164,64 +164,62 @@ class CBR(Console):
 
     def do_executeCBR(self, args):
         """Runs the CBR with the loaded case"""
-        #try:
-        cases = self.memory.retrieve(self.current_case, self.K)
-        """ cases = [(case,similarity)] cases is a list of case similarity
-        tuples."""
+        try:
+            cases = self.memory.retrieve(self.current_case, self.K)
+            """ cases = [(case,similarity)] cases is a list of case similarity
+            tuples."""
 
-        #cases2 = self.cases_hierarchical.retrieve(self.current_case, self.K)
+            print 'Those cases are:'
+            for (c,s) in cases:
+                c.printCase()
+                print 'sim: ', s
 
-        print 'Those cases are:'
-        for (c,s) in cases:
-            c.printCase()
-            print 'sim: ', s
+            sol_label = adapt(cases, self.memory.solutions)
+            print 'ADAPTATION - Result (Solution):'
+            print sol_label
 
-        sol_label = adapt(cases, self.memory.solutions)
-        print 'ADAPTATION - Result (Solution):'
-        print sol_label
+            result = evaluate(sol_label,[c for (c,s) in cases])
 
-        result = evaluate(sol_label,[c for (c,s) in cases])
+            print 'Result: ',result
+            if not result:
+                self.current_case.evaluation = False
 
-        print 'Result: ',result
-        if not result:
-            self.current_case.evaluation = False
+            example_case = self.cases_flat.cases[0]
+            attrType = example_case.label.values()[0].attrType()
 
-        example_case = self.cases_flat.cases[0]
-        attrType = example_case.label.values()[0].attrType()
+            if retain(self.current_case):
+                if attrType == 'r':
+                    if not result:
+                        case = Case(self.current_case.attributes,
+                            { self.cases_flat.cases[0].label.keys()[0] :
+                                RealAttr(sol_label)},False)
+                    else:
+                        case = Case(self.current_case.attributes,
+                            { self.cases_flat.cases[0].label.keys()[0] :
+                                RealAttr(sol_label)})
 
-        if retain(self.current_case):
-            if attrType == 'r':
-                if not result:
-                    case = Case(self.current_case.attributes,
-                        { self.cases_flat.cases[0].label.keys()[0] :
-                            RealAttr(sol_label)},False)
-                else:
-                    case = Case(self.current_case.attributes,
-                        { self.cases_flat.cases[0].label.keys()[0] :
-                            RealAttr(sol_label)})
+                elif attrType == 'c':
+                    if not result:
+                        case = Case(self.current_case.attributes,
+                            { self.cases_flat.cases[0].label.keys()[0] :
+                                CategoricalAttr(sol_label)},False)
+                    else:
+                        case = Case(self.current_case.attributes,
+                            { self.cases_flat.cases[0].label.keys()[0] :
+                                CategoricalAttr(sol_label)})
 
-            elif attrType == 'c':
-                if not result:
-                    case = Case(self.current_case.attributes,
-                        { self.cases_flat.cases[0].label.keys()[0] :
-                            CategoricalAttr(sol_label)},False)
-                else:
-                    case = Case(self.current_case.attributes,
-                        { self.cases_flat.cases[0].label.keys()[0] :
-                            CategoricalAttr(sol_label)})
-
-            elif attrType == 's':
-                if not result:
-                    case = Case(self.current_case.attributes,
-                        { self.cases_flat.cases[0].label.keys()[0] :
-                            StringAttr(sol_label)},False)
-                else:
-                    case = Case(self.current_case.attributes,
-                        { self.cases_flat.cases[0].label.keys()[0] :
-                            StringAttr(sol_label)})
-            self.memory.retain(case)
-        #except Exception as error:
-        #    print error
+                elif attrType == 's':
+                    if not result:
+                        case = Case(self.current_case.attributes,
+                            { self.cases_flat.cases[0].label.keys()[0] :
+                                StringAttr(sol_label)},False)
+                    else:
+                        case = Case(self.current_case.attributes,
+                            { self.cases_flat.cases[0].label.keys()[0] :
+                                StringAttr(sol_label)})
+                self.memory.retain(case)
+        except Exception as error:
+            print error
 
     def do_testDataSet(self,args):
         """ Executes a test over the loaded dataset"""
@@ -230,7 +228,7 @@ class CBR(Console):
         dataset = {}
         for t in types:
             dataset[t] = self.memory.getCases(t)
-    
+
         trues = []
         falses = []
         (t,f) = test1(self.memory, dataset)
@@ -254,7 +252,7 @@ class CBR(Console):
         (t,f) = test7(self.memory, dataset)
         trues.append(t)
         falses.append(f)
-        
+
         print 'trues: ', trues
         print 'falses: ', falses
 

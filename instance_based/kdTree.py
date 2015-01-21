@@ -32,7 +32,7 @@ class kdTree:
         self.num_cases = len(cases)
         self.num_dim = len(cases[0].attributes)
         self.cat_attributes = [name for (name, value) in cases[0].attributes.items()
-            if isinstance(value, CategoricalAttr)]
+            if not isinstance(value, RealAttr)]
         self.num_attributes = [name for (name, value) in cases[0].attributes.items()
             if isinstance(value, RealAttr)]
         self.solutions = []
@@ -53,12 +53,12 @@ class kdTree:
                 if not k.askValue() in self.solutions:
                     self.solutions.append(k.askValue())
 
-        self.root = self.__construct_tree(cases, 0)
+        self.root = self.__construct_tree(cases)
 
     def __del__(self):
         pass
 
-    def __construct_tree(self, cases, depth):
+    def __construct_tree(self, cases):
         """ Constructs a kd-tree recursively """
 
         n = len(cases)
@@ -101,8 +101,8 @@ class kdTree:
                     if case.attributes[best_attr].askValue() >= best_threshold]
 
             return Node(
-                    self.__construct_tree(left_cases, depth + 1),
-                    self.__construct_tree(right_cases, depth + 1),
+                    self.__construct_tree(left_cases),
+                    self.__construct_tree(right_cases),
                     (attr, threshold), n)
         # All the dimensions in this region are constant
         else:
