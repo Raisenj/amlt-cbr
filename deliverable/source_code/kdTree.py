@@ -123,8 +123,8 @@ class kdTree:
             return
 
         # Otherwise, go left and then right
-        self.__printMemory(node.left, index)
-        self.__printMemory(node.right, index)
+        self.__printMemory(node.left)
+        self.__printMemory(node.right)
 
     def __retrieve_all(self, node):
         """ Retrieve all the instance(s) below node """
