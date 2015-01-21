@@ -37,6 +37,66 @@ In this document we will outline how to use the \emph{AICS}, An Interactive CBR 
 
 \section{How to Use}
 
+The tool itself incorporates a build-in user manual. First of all we need to know how to execute the system. We need to open a terminal and go to the directory where it is located the CBR.py file. By executing such file typing \emph{python CBR.py} the CBR tool is executed. Figure \ref{fig:main} shows what we see once the CBR tool is executed.
+
+\begin{figure}[htb]
+    \center
+    \includegraphics[width=0.6\linewidth]{images/main}
+    \caption{CBR Interface}
+    \label{fig:main}
+\end{figure}
+
+If we type \emph{help} AICS will prompt the different functions (see Figure \ref{fig:cbrfunctions}.
+
+\begin{figure}[htb]
+    \center
+    \includegraphics[width=1\linewidth]{images/cbrfunctions}
+    \caption{CBR Functions}
+    \label{fig:cbrfunctions}
+\end{figure}
+
+Hence we will outline the functionality of each functions. These functionalities are listed with its description here:
+
+\begin{itemize}
+    \item \begin{description}
+            \item[loadCasesFromCsv] Allows to load a dataset
+        \end{description}
+    \item \begin{description}
+        \item[newCase] Allows to introduce a new case to be tested
+    \end{description}              
+    \item \begin{description}
+        \item[setWeights] Allows to assign a weight to each attribute
+    \end{description}              
+    \item \begin{description}
+        \item[setMemoryModel] Allows to select between use a flatMemory or a kdTree
+    \end{description}              
+    \item \begin{description}
+        \item[setRetrieveParameter] Allows to set the number of cases to retrieve in the retrieval phase
+    \end{description}              
+    \item \begin{description}
+        \item[executeCBR] Executes the CBR over the new case introduced    
+    \end{description}              
+    \item \begin{description}
+        \item[testDataSet] Makes different tests over the dataset introduced by splitting it into train and test data sets with different ratios    
+    \end{description}              
+    \item \begin{description}
+        \item[printCurrentCase] Print the current case loaded
+    \end{description}              
+    \item \begin{description}
+        \item[printMemory] Print the cases loaded at the library of cases 
+    \end{description}              
+    \item \begin{description}
+        \item[hist] Shows the last commands used
+    \end{description}              
+    \item \begin{description}
+        \item[help] Giving a function as a parameter it provides information about that function
+    \end{description}             
+    \item \begin{description}
+        \item[exit] Close the CBR tool
+    \end{description}              
+\end{itemize}
+
+At this point we will outlinen in the following section a guided example in order to better understand how it works.
 \section{A guided example}
 
 
